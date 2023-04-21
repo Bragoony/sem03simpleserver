@@ -6,9 +6,7 @@ import (
 	"net"
 	"sync"
 	"github.com/Bragoony/is105sem03/mycrypt"
-	"github.com/Bragoony/minyr/yr"
-	"strconv"
-	"strings"
+	"github.com/Trym123/minyr/yr"
 )
 
 func main() {
@@ -51,12 +49,11 @@ func main() {
 						_, err = conn.Write([]byte(string(kryptertMelding)))
 					case "Kjevik;SN39040;18.03.2022 01:50;6":
 						newString, err := yr.CelsiusToFahrenheitLine("Kjevik;SN39040;18.03.2022 01:50;6")
-							//dividedString := strings.Split("Kjevik;SN39040;18.03.2022 01:50;6", ";")
-							
-							//if fahr, err := strconv.ParseFloat(dividedString[3], 64); err == nil {
-							//log.Println(conv.CelsiusToFarhenheit(fahr)) }
-							//joinedString := strings.Join(dividedString, ";")
-							_, err = conn.Write([]byte(string(newString)))
+							if err != nil {
+							log.Fatal(err)
+							}
+							kryptertMelding := mycrypt.Krypter([]rune(string(newString)), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+							_, err = conn.Write([]byte(string(kryptertMelding)))
 
 					default:
 						_, err = c.Write(buf[:n])
