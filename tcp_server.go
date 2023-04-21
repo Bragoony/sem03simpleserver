@@ -44,7 +44,7 @@ func main() {
 					switch msg := string(dekryptertMelding); msg {
   				        case "ping":
 						//_, err = c.Write([]byte("pong"))
-						kryptertMelding := mycrypt.Krypter([]rune(string("pong")), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+						kryptertMelding := mycrypt.Krypter([]rune(string("pong")), mycrypt.ALF_SEM03, 4)
 						log.Println("krypter melding: ", string(kryptertMelding))
 						_, err = conn.Write([]byte(string(kryptertMelding)))
 					case "Kjevik;SN39040;18.03.2022 01:50;6":
@@ -52,7 +52,7 @@ func main() {
 							if err != nil {
 							log.Fatal(err)
 							}
-							kryptertMelding := mycrypt.Krypter([]rune(string(newString)), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+							kryptertMelding := mycrypt.Krypter([]rune(string(newString)), mycrypt.ALF_SEM03, 4)
 							_, err = conn.Write([]byte(string(kryptertMelding)))
 
 					default:
