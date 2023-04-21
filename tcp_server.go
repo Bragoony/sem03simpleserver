@@ -6,6 +6,9 @@ import (
 	"net"
 	"sync"
 	"github.com/Bragoony/is105sem03/mycrypt"
+	"github.com/Bragoony/minyr/yr"
+	"strconv"
+	"strings"
 )
 
 func main() {
@@ -43,9 +46,18 @@ func main() {
 					switch msg := string(dekryptertMelding); msg {
   				        case "ping":
 						//_, err = c.Write([]byte("pong"))
-						dekryptertMelding := mycrypt.Krypter([]rune(string("pong")), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
-						log.Println("krypter melding: ", string(dekryptertMelding))
-						_, err = conn.Write([]byte(string(dekryptertMelding)))
+						kryptertMelding := mycrypt.Krypter([]rune(string("pong")), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+						log.Println("krypter melding: ", string(kryptertMelding))
+						_, err = conn.Write([]byte(string(kryptertMelding)))
+					case "Kjevik;SN39040;18.03.2022 01:50;6":
+						newString, err := yr.CelsiusToFahrenheitLine("Kjevik;SN39040;18.03.2022 01:50;6")
+							//dividedString := strings.Split("Kjevik;SN39040;18.03.2022 01:50;6", ";")
+							
+							//if fahr, err := strconv.ParseFloat(dividedString[3], 64); err == nil {
+							//log.Println(conv.CelsiusToFarhenheit(fahr)) }
+							//joinedString := strings.Join(dividedString, ";")
+							_, err = conn.Write([]byte(string(newString)))
+
 					default:
 						_, err = c.Write(buf[:n])
 					}
